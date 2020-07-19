@@ -18,9 +18,14 @@ const Search = () => {
       });
       setResults(data.query.search);
     };
-    if (term) {
-      search();
-    }
+    const timeoutId = setTimeout(() => {
+      if (term) {
+        search();
+      }
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [term]);
   const renderResults = results.map(result => {
     return (
@@ -29,6 +34,8 @@ const Search = () => {
           <a
             href={`https://en.wikipedia.org?curid=${result.pageid}`}
             className="ui button"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Go
           </a>
