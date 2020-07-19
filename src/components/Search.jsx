@@ -18,15 +18,19 @@ const Search = () => {
       });
       setResults(data.query.search);
     };
-    const timeoutId = setTimeout(() => {
-      if (term) {
-        search();
-      }
-    }, 1000);
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [term]);
+    if (term && !results.length) {
+      search();
+    } else {
+      const timeoutId = setTimeout(() => {
+        if (term) {
+          search();
+        }
+      }, 1000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [results.length, term]);
   const renderResults = results.map(result => {
     return (
       <div className="item" key={result.pageid}>
