@@ -1,9 +1,11 @@
 import "./App.css";
 
 import React, { useState } from "react";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Accordion from "./components/Accordion";
 import Dropdown from "./components/Dropdown";
+import Menu from "./components/Menu";
 import Search from "./components/Search";
 import Translate from "./components/Translate";
 
@@ -36,27 +38,35 @@ const options = [
     value: "blue"
   }
 ];
-// <Accordion items={items} />
-// <Search />
-{
-  /* <button onClick={() => setShowDropdown(!showDropdown)}>
-  Toggle dropdown
-</button>
-{showDropdown ? (
-  <Dropdown
-    options={options}
-    selected={selected}
-    onSelectedChange={setSelected}
-  />
-) : null} */
-}
 
 const App = () => {
-  // const [selected, setSelected] = useState(options[0]);
-  // const [showDropdown, setShowDropdown] = useState(true);
+  const [selected, setSelected] = useState(options[0]);
+
   return (
     <>
-      <Translate />
+      <Router>
+        <Menu />
+
+        <Switch>
+          <Route path="/" exact>
+            <Accordion items={items} />
+          </Route>
+          <Route path="/list">
+            <Search />
+          </Route>
+          <Route path="/dropdown">
+            <Dropdown
+              label="Select color"
+              options={options}
+              selected={selected}
+              onSelectedChange={setSelected}
+            />
+          </Route>
+          <Route path="/translate">
+            <Translate />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 };
