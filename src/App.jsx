@@ -45,6 +45,7 @@ const App = () => {
   return (
     <>
       <Router>
+        <h2>Widgets application</h2>
         <Menu />
 
         <Switch>
