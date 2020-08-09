@@ -1,5 +1,6 @@
 Check live version here:
 https://widgets-flame.vercel.app/
+or https://tender-fermat-6f4ee5.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
